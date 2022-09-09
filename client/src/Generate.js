@@ -154,7 +154,7 @@ class Generate extends Component {
             </table>
             </div>
 
-            <button onClick={()=>this.props.logoutUser} className="logout-btn">LOG OUT</button>
+            <button onClick={()=>this.props.logoutUser()} className="logout-btn">LOG OUT</button>
         </div>
         
     );

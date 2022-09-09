@@ -8,10 +8,14 @@ export class Login extends Component {
     state = {
         email: "",
         password: "",
-        redirect:false
+        redirect: false,
+        error:{}
     }
 
-  
+  componentWillReceiveProps(nextProps) {
+      console.log(nextProps)
+      this.setState({error:nextProps.error})
+  }
 
     
     componentDidMount() {
@@ -25,9 +29,12 @@ export class Login extends Component {
         }
         return (
             <div className="login_admin">
+                {this.state.error.email && <div style={{color:'red'}}>{this.state.error.email}</div>}
                 <input className="login_input" type="email" placeholder="enter email"
                     onChange={(e) => this.setState({ email: e.target.value })}
                 />
+
+{this.state.error.password && <div style={{color:'red'}}>{this.state.error.password}</div>}
                 <input className="login_input" type="password" placeholder="enter password"
                     onChange={(e) => this.setState({ password: e.target.value })}
                 />
@@ -45,7 +52,8 @@ export class Login extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    auth:state.auth
+    auth: state.auth,
+    error:state.errors
 })
 
 const mapDispatchToProps = {
