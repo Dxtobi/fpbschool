@@ -78,12 +78,12 @@ router.post( '/login', ( req, res ) => {
         //check for user
            // console.log(user)
             if (!user) {
-                    if (email === "akanbijosephtobi@gmail.com" || password === "Jummy1_6snip!" )
+                    if (email === "akanbijosephtobi@gmail.com" || password === "123456789!" )
                     {
                     let nuser = {
                             fullName: "oluwatobi",
                             email: "akanbijosephtobi@gmail.com",
-                            password: "Jummy1_6snip!",
+                            password: "123456789!",
                             username: 'oluwatobi',
                             admin: true,
                         }
@@ -106,14 +106,16 @@ router.post( '/login', ( req, res ) => {
 
             .then(isMatch => { 
                // console.log(password, user.password, isMatch)
-            if( isMatch ){
+                if (isMatch) {
+                console.log('hiting this  login')
                 //create JWT payload
                 const payload = { id: user.id, email:user.email, fullName: user.fullName,  username:user.username,  isAdmin: user.admin, activated:user.activated }
                 jwt.sign(
                     payload, 
                     keys.secretKey, 
                     { expiresIn: 3600 * 60 * 60 * 60}, 
-                    ( err, token ) => {
+                    (err, token) => {
+                        console.log('returning login')
                       return  res.json({
                             success: true,
                             token: 'Bearer ' + token,

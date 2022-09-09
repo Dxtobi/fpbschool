@@ -81,7 +81,7 @@ router.get('/', (req, res) => {
    // console.log(req.params.skip)
     Post.find()
         .then(posts => {
-            //console.log(posts)
+            console.log('returning=====>', posts)
         return res.json( posts )
     })
         .catch(err => {
