@@ -57,9 +57,6 @@ mongoose
     })
     .catch(err => console.log(err));
 
-
-
-
 const dbi = mongoose.connection
 dbi.once('open', _ => {
     console.log('connected db');
@@ -86,23 +83,22 @@ dbi.once('open', _ => {
         }
     })
 })
-
 dbi.once('error', _ => {
     console.log('error connected db')
 })
 //passport middleware
 app.use(passport.initialize());
-
 //passport strategy
 require('./config/passport')(passport);
 //middleware
-//if (process.env.NODE_ENV === 'production') {
-//    app.use(express.static(path.join(__dirname, 'client/build')))
-//}
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+app.use('/upload' , express.static(path.join(__dirname , '/upload')));
+app.use(express.urlencoded({ extended: false }))
+
 app.use('/api/users', users);
 //app.use('/api/market', market);
 app.use('/api/posts', posts);
-
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build')); // serve the static react app
@@ -111,10 +107,7 @@ if (process.env.NODE_ENV === 'production') {
     });
     console.log('Serving React App...');
   };
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
-app.use('/upload' , express.static(path.join(__dirname , '/upload')));
-app.use(express.urlencoded({extended:false}))
+
 
 //app.get('*', (req, res) => {
    // res.sendFile(path.join(__dirname, '../build'))
