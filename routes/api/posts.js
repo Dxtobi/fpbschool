@@ -76,14 +76,10 @@ router.get('/tags', (req, res) => {
         return res.status(404).json({ nopostsfound: 'No posts found!' })
     });
 });
-router.get('/:skip', (req, res) => {
+router.get('/', (req, res) => {
    // console.log("hit route")
    // console.log(req.params.skip)
     Post.find()
-        .populate('tags')
-        .sort({ date: -1 })
-        .skip(parseInt(req.params.skip))
-        .limit(8)
         .then(posts => {
             //console.log(posts)
         return res.json( posts )
@@ -128,29 +124,25 @@ router.get('/one/:id', (req, res) => {
         });
 });
 
-router.post( '/', uploadFunctions.upload.array('postImageData'), passport.authenticate( 'jwt', { session: false } ), ( req, res ) => {
+router.post( '/',  passport.authenticate( 'jwt', { session: false } ), ( req, res ) => {
   
-    let allImg = uploadFunctions.pushImgs(req.files)
-  
-    if (allImg.length < 0 || req.body.name === '' || req.body.text === '' || req.body.tags === '') {
-        return res.status(400).json({error:'something went wrong'})
-   }
+
     //console.log("hit-create post")
     
    // console.log(req.body)
+    /**
+     * lecturer: '',
+        course: '',
+        level:'
+     */
     const newPost = new Post( {
-        text: req.body.text,
-        name: req.body.header,
-        header: req.body.header,
-        tags:req.body.tags,
-        htmlText: req.body.htmlText,
-        postImage:allImg,
-        videoLink:req.body.videoLink,
-        user: req.user.id
-    } );
+        lecturer: req.body.lecturer,
+        course: req.body.course,
+        level: req.body.level,
+    });
 
     newPost.save().then(post => {
-      //  console.log(post)
+       // console.log(post)
         return res.json(post)
     }).catch(err => {
         console.log(err.message)
@@ -179,21 +171,16 @@ router.put( '/update/:id', uploadFunctions.upload.array('postImageData'), passpo
     
 });
 
-router.delete( '/:id', passport.authenticate( 'jwt', { session: false } ), ( req, res ) => {
-    
-    User.findOne( { user: req.user.id } )
-        .then( profile => {
+router.delete( '/:id',  ( req, res ) => {
+console.log('hit', req.params.id)
             Post.findById( req.params.id )
                 .then( post => {
                 post.remove()
                     .then( () => {
                     res.json( { success: true } );
                 })
-            })
-            
-    })
-    .catch( err => res.status( 404 ).json( err ) );
-    
+            }).catch( err => res.status( 404 ).json( err ) );
+
 });
 
 router.post( '/like/:id',  ( req, res ) => {
@@ -214,7 +201,6 @@ router.post( '/like/:id',  ( req, res ) => {
     
 });
 
-
 router.post( '/comment/:id',  ( req, res ) => {
 console.log("hit")
     Post.findById( req.params.id )
@@ -234,6 +220,7 @@ console.log("hit")
         });
 
 });
+
 router.get( '/related/:tagID', passport.authenticate( 'jwt', { session: false } ), ( req, res ) => {
     Post.find({tags:req.params.tagID})
         .populate('tags')

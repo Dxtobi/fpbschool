@@ -7,7 +7,7 @@ export const Header = (props) => {
     return (
         <div className="C_header">
             <Link to="/" className="c_brand">
-               HYPE TV
+               FEDERAL POLY BIDA
             </Link>
             <div className="c_header-left">
                 <Link to="/search" className="c_brand_left">
@@ -15,7 +15,7 @@ export const Header = (props) => {
                     <FiSearch />
     
                 </Link>
-                <Link to="/auth_user" className="c_brand_left">
+                <Link to="/login" className="c_brand_left">
                    
                   <div className='signinlogin'><FiUser/></div>
     
@@ -24,6 +24,7 @@ export const Header = (props) => {
         </div>
     )
 }
+
 
 const mapStateToProps = (state) => ({
 

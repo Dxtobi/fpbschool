@@ -106,12 +106,12 @@ export const addMessage = message => dispatch => {
       );
 };
 
-export const getPosts = (skip) => dispatch => {
+export const getPosts = () => dispatch => {
 
   dispatch(setPostLoading());
 
   axios
-    .get(`/api/posts/${skip}`)
+    .get(`/api/posts`)
     .then(res => {
         dispatch({
           type: GET_POSTS,
@@ -170,10 +170,11 @@ export const getPost = id => dispatch => {
 };
 
 export const deletePost = id => dispatch => {
+  console.log(id)
   axios
     .delete(`/api/posts/${id}`)
     .then(res =>
-      dispatch(getPosts(0))
+      dispatch(getPosts())
     )
     .catch(err =>
       dispatch({

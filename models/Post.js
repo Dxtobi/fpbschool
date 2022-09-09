@@ -2,67 +2,21 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
-   user: {
-       type: Schema.Types.ObjectId,
-       ref: 'users'
-   },
-   text: {
-       type: String,
-       //required: true,
-       default:''
-    },
-    htmlText: {
+    level: {
         type: String,
         required: true,
-        
-    },
-   header: {
+        default:''
+   },
+   lecturer: {
        type: String,
-       required: true
-   },
-   avatar: {
-       type: String
-   },
-    likes: {
-        type: Number,
-        default:0
+       required: true,
+       default:''
     },
-    views: {
-        type: Number,
-        default:0
+    course: {
+        type: String,
+       required: true,
+       default:''
     },
-    postImage: [],
-    videoLink: {
-        type: String
-    },
-    tags: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'tags'
-        }
-    ],
-    comments: [
-        {
-            text: {
-               type: String,
-               required: true
-            },
-            name: {
-                type: String,
-               // required: true,
-                default: "Anonymous",
-                
-            },
-            date: {
-                type: Date,
-                default: Date.now
-            }
-        }
-    ],
-    date: {
-        type: Date,
-        default: Date.now
-    }
 });
 
 

@@ -22,15 +22,15 @@ import HomeLanding from './pages/landing/HomeLanding';
 import  Login  from './pages/admin/reg/Login';
 import NewTag from './pages/admin/NewTag';
 import EditPost from './pages/admin/EditPost';
-import SinglePost from './pages/landing/SinglePost';
 import Messages from './pages/admin/Messages';
-import  Search  from './pages/landing/search';
-import LoginClient from './pages/landing/Login';
-import Market from './pages/landing/Market';
+
+
 import Register from './pages/landing/Register';
 import Admin from './components/shared/Auth/Admin';
 import Signin from './pages/Auth/Signin';
 import Signup from './pages/Auth/Signup';
+import Editcourse from './pages/Editcourse';
+import Generate from './Generate';
 
 
 
@@ -68,33 +68,25 @@ class App extends Component {
             <div className="my-container">
               <Switch>
                 <Route exact path="/" component={HomeLanding} />
-                <Route exact path="/news/:id" component={SinglePost} />
                 <Route exact path="/login" component={Login} />
-                <Route exact path="/search" component={Search} />
-                <Route exact path="/auth_user" component={LoginClient} />
-                <Route exact path="/market" component={Market} />
                 <Route exact path="/signin" component={Signin} />
                 <Route exact path="/signup" component={Signup} />
-
                 {
                   //  ONLY LOGGED IN  ROUTE
                 }
-
                 <PrivateRoute exact path="/sellform" component={Register} />
-
-
                 {
                   //  ADMIN ROUTE
                 }
                 <Admin exact path="/create/admin" component={newAdmin} />
                 <Admin exact path="/create/tag" component={NewTag} />
                 <Admin exact path="/admins/messages" component={Messages} />
-                <Admin exact path="/edit/post/:id" component={EditPost} />
+                <Admin exact path="/generate" component={Generate} />
                 <Admin exact path="/create/post" component={newPost} />
                 <Admin exact path="/admin/posts" component={Posts} />
-                <Admin exact path="/admins" component={Admins} />
+                <Admin exact path="/timetable" component={Editcourse} />
                 <Admin exact path="/admin/home" component={AdminHome} />
-                <Admin exact path="/adm" component={ AdminHome } />
+                <Admin exact path="/adm" component={ Generate } />
                 <Route  path="" component={ NotFound }/>
               </Switch>
             </div>

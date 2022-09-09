@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
 class heder extends Component {
 
        state = { 
@@ -17,14 +18,24 @@ class heder extends Component {
         return (
             <div className='Admin-header'>
                 <div className="adm-header-right">
-                    <div className="adm-header-brand">BloggerMan</div>
-                    <div className="adm-header-txt">Admin</div>
+                <div className='btn-holder_'>
+                        <div className='link-btn_'>
+                            <Link className='adm-btn' to='/create/post'>ADD COURSE</Link>
+                        </div>
+                        <div className='link-btn_'>
+                            <Link className='adm-btn'to='/timetable'>EDIT COURSES</Link>
+                        </div>
+                        <div className='link-btn_'>
+                            <Link  className='adm-btn' to='/generate'>TIME TABLE</Link>
+                        </div>
+                   </div>
                 </div>
                
             </div>
         );
     }
 }
+
 
 const mapStateToProps = ( state ) => ({
     auth: state.auth,

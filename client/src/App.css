@@ -3,7 +3,60 @@
     padding: 0px;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
+.lecturer__ {
+    font-size: large;
+    text-transform: uppercase;
+    display: flex;
+    border-bottom: 2px solid gray;
+    justify-content: space-between;
+    margin: 28px auto;
+    align-items: center;
+}
+.footer_container2 {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.HEADER {
+    font-size: xx-large;
+    font-weight: 800;
+    text-align: center;
+    color: #0691d0;
+}
+input.enter-input {
+    width: 100%;
+    padding: 20px;
+    margin: 20px auto;
+    border: 2px solid #03a9f4;
+    border-radius: 10px;
+}
 
+button.enter-input-btn {
+    width: 100%;
+    padding: 20px;
+    margin: 10px auto;
+    border-radius: 10px;
+    border: none;
+    background: #03a9f4;
+    color: white;
+}
+img.top-log {
+    width: 50%;
+    margin: 10px auto;
+}
+.lecturer__h {
+    color: #0691d0;
+    font-weight: 800;
+    font-size: large;
+    text-transform: uppercase;
+    display: flex;
+    border-bottom: 2px solid gray;
+    justify-content: space-between;
+    margin: 28px auto;
+    align-items: center;
+}
 /**COLORS SECTION**/
 .green-bg{
     background: #0dd30d!important;
@@ -59,9 +112,9 @@
     border-radius: 50px;
 }
 .adm-content-container {
-    width: 60%;
-    margin: 150px auto;
-    min-height: 100vh;
+    width: 70%;
+    margin: 100px auto;
+    min-height: 50vh;
 }
 .adm-navigation-btn {
     display: -ms-flexbox;
@@ -98,12 +151,22 @@
     left: 0;
     margin-top: 100px;
 }
-
+.link-btn {
+    background: #078fcc;
+    color: white!important;
+    text-decoration: none;
+    padding: 10px;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+.link-btn a{
+   
+    color: white!important;
+    text-decoration: none;
+   
+}
 .admin-container {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
+   
 }
 .post_list_holder {
     display: flex;
@@ -155,7 +218,7 @@
     justify-content: space-between;
     -ms-flex-align: center;
     align-items: center;
-    padding: 30px 10px;
+    padding: 10px 10px;
     font-size: x-large;
     -webkit-box-shadow: 0px 9px 7px -10px #0000007a;
     box-shadow: 0px 9px 7px -10px #0000007a;
@@ -165,7 +228,11 @@
     width: 100%;
     z-index: 200;
     left: 0;
+    top: 0;
     /* margin-bottom: 207px; */
+}
+.btn-holder {
+    margin: 30px auto;
 }
 .adm-header-right {
     display: flex;
@@ -240,8 +307,20 @@
     border: 1px solid #80808030;
     color: white;
 }
-.adm-model-txt{
+.adm-btn {
+    text-align: center;
+    color: white;
+    text-decoration: none;
+}
+.btn-holder_ {
+    display: flex;
+}
 
+button.delete-btn {
+    padding: 7px;
+    border: none;
+    background: red;
+    color: white;
 }
 .adm-model-btn-holder {
     display: flex;

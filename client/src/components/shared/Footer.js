@@ -54,57 +54,14 @@ class Footer extends Component {
         return (
             <div className='Footer-page'>
                 <div className="footer_container2">
-                    <div className="footer-sec">
-                        <div className="footer-header-text">Tags</div>
-                        <div className="footer-tags-holder">{
-                                tags.map((t, i) => {
-                                    return <button key={i}
-                                        className="footer-tags-btn"
-                                        onClick={() => {
-                                            this.getTaggedPostF(t._id)
-                                        }}
-                                    >{t.name}</button>
-                                })
-                        }
-                       
-                        </div>
-                    </div>
-                    <div>
-                        <div className="footer-header-text">About Us</div>
-                        <div className="footer-text">
-                            {this.state.adsText}
-                        </div>
-                    </div>
-                </div>
-                <div className="footer_container2">
-                    <div className="footer-sec">
-                    <div className="footer-header-text">Looking For some thing?</div>
-                        <Link to="/search" className="footer-search">
-                            <input placeholder="Nike" className="footer-search-input" />
-                            <FiSearch/>
-                        </Link>
-                        <div className="footer-contact-section">
-                            <div className="footer-header-text">Send us a message</div>
-                            <div className="footer-search">
-                                <input onChange={(e) => {
-                                    this.setState({phone:e.target.value})
-
-                            }} value={this.state.phone} type="number" placeholder="WHATSAPP Number" className="footer-search-input" />
-                            <FiPhoneCall/>
-                        </div>
-                            <textarea onChange={(e) => {
-                                    this.setState({message:e.target.value})
-                            }} value={this.state.message} className="footer-contact-textarea" placeholder="want to advertise?" />
-                            
-                         <button onClick={this.sendMessage} className="footer-btn">Send</button>
-                        </div>
-                       
-                    </div>
+                <img src="/bida_logo.png" alt='' className="top-log"/>
+                    <div className='footer-text'> <h1>FEDERAL POLY BIDA</h1> </div>
                 </div>
             </div>
         );
     }
 }
+
 
 const mapStateToProps = (state) => ({
     auth: state.auth,

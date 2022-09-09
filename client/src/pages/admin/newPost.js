@@ -2,213 +2,61 @@ import React, {
     Component
 } from 'react'
 
-
-
-
 import {
     connect
 } from 'react-redux'
 import Header from './components/Header';
 import SideBar from './components/sideBar';
-import Editor from "./components/EditorMain";
-import SelectImg from './components/SelectImg';
-import TitleHeader from './components/TitleHeader';
 import { getGlobalInfo } from '../../actions/authActions';
 import { addPost } from '../../actions/postsActions';
+import { Link } from 'react-router-dom';
 
 class NewPost extends Component {
 
     state = {
-        postHeader: "",
-        imgs: [],
-        display:[],
-        PostVideoLink: "",
-        contentState: {
-            blocks:[]
-        },
-        text:"",
-        tags: [],
-        error: false,
-        cleared: false,
-        preview:false
+        lecturer: '',
+        course: '',
+        level:''
     };
 
-    componentDidMount() {
-         this.props.getGlobalInfo()
-
-    }
-
-    componentDidUpdate(np) {
-       // console.log(this.state.contentState, this.state.text)
-    }
-
-    onContentStateChangePass = (contentState) => {
-        this.setState({
-            contentState: contentState,
-            error: false,
-        });
-
-        console.log(contentState)
-    };
-    
-    onChangeImage = (e) => {
-        let imgs = [];
-        let display = [];
-        for (let index = 0; index <  e.target.files.length; index++) {
-            imgs.push(e.target.files[index])
-            display.push( URL.createObjectURL(e.target.files[index]))
-        }
-        
-        if (imgs.length > 0 || display.length>0) {
+    onAdd=()=>{
+        const { lecturer, course, level } = this.state
+        if (lecturer !== '' || course !== '' || level !== '') {
+            const data = { lecturer, course, level }
+            this.props.addPost(data)
             this.setState({
-                imgs: imgs,
-                display:display
+                lecturer: '',
+                course: '',
+                level: '',
             })
+            console.log(data)
         }
-
-       // console.log(imgs, display)
-      };
-    normalText = (e) => {
-        this.setState({
-            text: e
-        });
-       // console.log(e)
-      }
-
-    onSend = () => {
-        let formObj = new FormData();
-        const {__html }= this.state.contentState
-        const {imgs,  postHeader, tags, PostVideoLink, text}=this.state
-
-        if ((__html === undefined || __html === null) || postHeader.length < 3) {
-            return this.setState({error:true})
-        }
-      
-        for (let index = 0; index <  imgs.length; index++) {
-            formObj.append('postImageData', imgs[index]);
-          
-        }
-        
-        for (let index = 0; index <  tags.length; index++) {
-            formObj.append('tags', tags[index]);
-          
-        }
-     //   console.log(text)
-       // formObj.append("tags", tags);
-        formObj.append("header", postHeader);
-        formObj.append("videoLink", PostVideoLink)
-        formObj.append("htmlText", __html)
-        formObj.append("text", text)
-        this.props.addPost(formObj)
-        this.setState({
-            postHeader: "",
-            imgs: [],
-            display:[],
-            PostVideoLink: "",
-            contentState: {
-                blocks:[]
-            },
-            text:"",
-            tags: [],
-            error: false,
-            cleared:true
-        })
     }
+   
 
-    onchangeHeader = (e) => {
-        this.setState({
-            postHeader:e.target.value
-        })
-    }
+    onChangeValue=(e)=>{
 
-    select = (id) => {
-        const {tags}=this.state
-        let i = this.checkArr(id, tags)
-        if (i) {
-           return this.remove(id)
-        }
-
-        return this.setState({ tags: [...this.state.tags, id] })
-    }
-
-    remove = (e) => {
-        const { tags } = this.state
-       
-        
-        for (let i = 0; i < tags.length; i++) {
-               //const element = tags[i];
-               if (tags[i]===e) {
-                   tags.splice(i, 1)
-                   console.log(tags)
-                   return this.setState({tags:tags})
-               }
-           }
-        
-        
-    }
-
-    checkArr = (e) => {
-
-        const { tags } = this.state
-       // console.log(e, tags)
-        const val =tags.some( (marked) => {  
-            if(marked === undefined || marked !== e){
-                return false
-            } else {
-                return true
-            }
-        })
-        return val
-    }
-
-    setCleared = () => {
-        this.setState({cleared:false})
-    }
-    setPreview = () => {
-        this.setState({
-            preview:!this.state.preview
-        })
+        this.setState({[e.target.name]: e.target.value})
     }
     render() {
         //console.log(this.state)
-        const { contentState, postHeader, cleared } = this.state;
-        const { tags } = this.props.auth.global;
+       // const { contentState, postHeader, cleared } = this.state;
+       // const { tags } = this.props.auth.global;
         return (
             <div className='NewPost-page' >
                  <Header/>
-                 <div className="admin-container">
-                    <SideBar />
+                <div className="admin-container">
+                    <br />
+                    <br/>
+                    <br />
+               
                     <div className="adm-content-container">
-                        <div className='post-btn-holder'>
-                            <button onClick={this.onSend} className="storeBtn">PUBLISH</button>
-                            <button onClick={this.setPreview} className="storeBtn">PREVIEW</button>
+                        <div className='form-holder'>
+                            <input onChange={(e)=>this.onChangeValue(e)} className='enter-input' placeholder='LECTURER NAME' name='lecturer' value={this.state.lecturer} />
+                            <input onChange={(e)=>this.onChangeValue(e)} className='enter-input' placeholder='COURSE CODE' name='course' value={this.state.course} />
+                            <input onChange={(e)=>this.onChangeValue(e)} className='enter-input' placeholder='COURSE LEVEL' name='level' value={this.state.level} />
+                            <button onClick={this.onAdd} className='enter-input-btn'>ADD</button>
                         </div>
-                        <TitleHeader onChange={this.onchangeHeader} value={postHeader} placeholder="Post Header"/>
-                        <SelectImg onChangeImage={this.onChangeImage}/>
-                        <Editor contentState={contentState}
-                            onContentStateChangePass={this.onContentStateChangePass}
-                            normalText={this.normalText}
-                            setCleared={this.setCleared}
-                            cleared={cleared}
-                            preview={this.state.preview}
-                            display={this.state.display}
-                            header={this.state.postHeader}
-                            videoLink={this.state.videoLink}
-                            tags={this.state.tags}
-                            setPreview={this.setPreview}
-                        />
-                        <div className="tag-container">
-                            {
-                                tags.map((t, i) => {
-                                    return (
-                                        <div className={`tag ${this.checkArr(t._id)&&'selected-bg'}`} onClick={() => {
-                                            this.select(t._id)
-                                        }} key={i}>{t.name}</div>
-                                    )
-                                })
-                            }
-                        </div>
-                        
                     </div>
                 </div>
             </div>
