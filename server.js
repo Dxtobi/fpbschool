@@ -100,7 +100,7 @@ app.use('/api/users', users);
 //app.use('/api/market', market);
 app.use('/api/posts', posts);
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production'|| process.env.NODE_ENV === 'staging') {
     app.use(express.static('client/build')); // serve the static react app
     app.get(/^\/(?!api).*/, (req, res) => { // don't serve api routes to react app
       res.sendFile(path.join(__dirname, './client/build/index.html'));
