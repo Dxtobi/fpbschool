@@ -47,12 +47,13 @@ button.generate-btn {
 }
 tr {
     border: 1px solid black;
-    background: lightgrey;
+    background: rgb(255, 255, 255);
 }
 td {
     font-size: 15px;
     font-weight: lighter;
     padding: 0.1rem; 
-    color: #808080;
+    color: #000000;
     line-height: 1.4;
+    border: 1px solid black;
 }

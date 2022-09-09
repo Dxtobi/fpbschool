@@ -6,7 +6,8 @@ import "./Generate.css";
 import { connect } from 'react-redux'
 import Header from "./pages/admin/components/Header";
 
-
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
 
 class Generate extends Component {
   state = { value: "", data:[], days:["Time",'Monday',
@@ -32,6 +33,7 @@ class Generate extends Component {
     });
   }
 
+
     onGenerate = () => {
         let newData = this.state.data;
        // newData.push(  { coursecode: 'No lectures', lecturer: "", level: "" });
@@ -52,15 +54,27 @@ class Generate extends Component {
         return array
   }
    
+  printDocument() {
+    const input = document.getElementById('divToPrint');
+    html2canvas(input)
+      .then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+        pdf.addImage(imgData, 'JPEG', 0, 0);
+        // pdf.output('dataurlnewwindow');
+        pdf.save("download.pdf");
+      })
+    ;
+  }
   render() {
     return (
         <div>
             <Header/>
             <div className="button-holders">
                 <button onClick={this.onGenerate} className="generate-btn">Generate Table</button>
-                <button onClick={()=>window.print()} className="generate-btn">Print</button>
+                <button onClick={this.printDocument} className="generate-btn">Print</button>
             </div>
-            <div className="table-holder">
+            <div className="table-holder" id="divToPrint">
 
             <table>
                     <tr>
