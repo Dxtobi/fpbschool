@@ -99,6 +99,10 @@ require('./config/passport')(passport);
 //if (process.env.NODE_ENV === 'production') {
 //    app.use(express.static(path.join(__dirname, 'client/build')))
 //}
+app.use('/api/users', users);
+//app.use('/api/market', market);
+app.use('/api/posts', posts);
+
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build')); // serve the static react app
@@ -117,9 +121,7 @@ app.use(express.urlencoded({extended:false}))
 //})
 
 
-app.use('/api/users', users);
-//app.use('/api/market', market);
-app.use('/api/posts', posts);
+
 
 
 const port = process.env.PORT || 5000;
