@@ -77,7 +77,7 @@ router.get('/tags', (req, res) => {
     });
 });
 router.get('/', (req, res) => {
-   // console.log("hit route")
+   console.log("hit route get")
    // console.log(req.params.skip)
     Post.find()
         .then(posts => {
